@@ -1,5 +1,9 @@
 # Cantemo Community Repository
 
-A place for customers can submit code for other to use and look.
+A place where customers can submit code for others to use and look at.
 
-Fork the repository, add your changes on a feature branch and submit a Pull request for us to review.
+1. Fork the repository
+1. Add your changes on a feature branch
+1. Submit a Pull Request
+1. We will review it, and hopefully merge :)
+
