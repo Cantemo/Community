@@ -1,0 +1,98 @@
+<!--
+This jobstep will extract a path component, in this case the top level
+directory on the storage, and add the item to a collection with that name.
+
+The collection will be created with the same import settings as the item
+which is being imported to make sure the permissions are set up correctly.
+
+You can configure the pattern, which is a regular expression if you want
+to extract a different path component.
+
+You can also configure exactly which storages this script should operate on.
+Files which are ingested on other storages will be ignored.
+-->
+
+<TaskDefinitionListDocument xmlns="http://xml.vidispine.com/schema/vidispine">
+  <task>
+    <description>Adding item to a project collection</description>
+    <script><![CDATA[
+
+// Example filename: 12923 This is a test project/Incoming/Baby.mov
+// Will create a collection named "12923 This is a test project"
+
+var pattern = /^([^/]+)\/.*/;
+
+
+/* This script only applies to jobs ingested from these storages */
+var onlyStorageIds = ["VX-3", "VX-4"];
+
+// ******** NO SETTINGS BELOW THIS LINE **********
+
+// If we don't define a schema, nothing works
+default xml namespace = "http://xml.vidispine.com/schema/vidispine";
+
+function getFilename(storageId, fileId) {
+  var result = api.user("admin").path("storage/"+storageId + "/file/" + fileId).dataType("json").get();
+
+  return "" + result.path;
+}
+
+function getSettingsId(storageId) {
+    var autorule = api.user("admin").path("storage").path(storageId).path("auto-import").dataType("json").get()
+
+    return autorule.settingsId;
+}
+
+function addItemToCollection(itemId, collectionName) {
+    logger.log("PORTAL JS DAILIES JOBSTEP: Adding item " + itemId + " to collection " + collectionName);
+    job.setData("collectionName", collectionName)
+}
+
+
+logger.log("PORTAL JS DAILIES JOBSTEP: Enter");
+// Retrieve the id of the item that is being imported
+var itemId = job.getData("itemId") + "";
+logger.log("PORTAL JS DAILIES JOBSTEP: Got itemid");
+logger.log("PORTAL JS DAILIES JOBSTEP: Itemid " + itemId);
+
+var storageId = job.getData("sourceStorageId") + "";
+
+if (onlyStorageIds.indexOf(storageId) != -1) {
+
+ var originalFilename = getFilename(storageId, job.getData("sourceFileId"));
+
+ logger.log("PORTAL JS DAILIES JOBSTEP: orignalFilename " + originalFilename);
+
+ var match = pattern.exec(originalFilename);
+
+ if (match) {
+
+  // The job metadata doesn't contain the full path, so we have to fetch it from the file
+  var firstdircomponent = match[1];
+  var collectionName = firstdircomponent;
+
+  addItemToCollection(itemId, collectionName);
+
+  var settingsId = getSettingsId(storageId);
+  if(settingsId) {
+    logger.log("PORTAL JS DAILIES JOBSTEP: Setting importSettingsId to " + settingsId);
+    job.setData("importSettingsId", settingsId);
+  }
+
+ } else {
+   logger.log("PORTAL JS DAILIES JOBSTEP: Original Filename did not match pattern");
+ }
+} else {
+  logger.log("PORTAL JS DAILIES JOBSTEP: Skipping source file on storage " + storageId);
+}
+
+]]></script>
+    <step>170</step>
+    <dependency>
+      <previous>true</previous>
+      <allPrevious>false</allPrevious>
+    </dependency>
+    <jobType>AUTO_IMPORT</jobType>
+    <critical>false</critical>
+  </task>
+</TaskDefinitionListDocument>

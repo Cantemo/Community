@@ -1,0 +1,26 @@
+<TaskDefinitionListDocument xmlns="http://xml.vidispine.com/schema/vidispine">
+  <task>
+    <description>Waiting for file to close</description>
+    <script><![CDATA[
+// If we don't define a schema, nothing works
+default xml namespace = "http://xml.vidispine.com/schema/vidispine";
+
+var fileId = job.getData("sourceFileId");
+logger.log("AUTOIMPORT WAIT CLOSED: fileid="+fileId);
+var result = api.user("admin").path("storage/file/"+fileId).dataType("json").get();
+
+var state = result.state;
+logger.log("AUTOIMPORT WAIT CLOSED: state="+state);
+if(state === "OPEN" || result.size == 0) {
+  job.wait("AUTOIMPORT WAIT CLOSED: File " + result.path + " with file id " + fileId + " is still in state OPEN.");
+}
+]]></script>
+    <step>225</step>
+    <dependency>
+      <previous>true</previous>
+      <allPrevious>false</allPrevious>
+    </dependency>
+    <jobType>AUTO_IMPORT</jobType>
+    <critical>true</critical>
+  </task>
+</TaskDefinitionListDocument>
