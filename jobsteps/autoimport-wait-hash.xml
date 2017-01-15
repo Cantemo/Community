@@ -1,0 +1,24 @@
+<TaskDefinitionDocument xmlns="http://xml.vidispine.com/schema/vidispine">
+    <description>Waiting for hash to be available</description>
+    <script><![CDATA[
+// If we don't define a schema, nothing works
+default xml namespace = "http://xml.vidispine.com/schema/vidispine";
+
+var fileId = job.getData("sourceFileId");
+logger.log("AUTOIMPORT WAIT HASH: fileid="+fileId);
+var result = api.user("admin").path("storage/file/"+fileId).dataType("json").get();
+
+var hash = result.hash;
+logger.log("AUTOIMPORT WAIT HASH: hash="+hash);
+if(!hash) {
+  job.wait("AUTOIMPORT WAIT HASH: Hash hash not yet been calculated for file " + fileId);
+}
+]]></script>
+    <step>10000</step>
+    <dependency>
+      <previous>true</previous>
+      <allPrevious>false</allPrevious>
+    </dependency>
+    <jobType>AUTO_IMPORT</jobType>
+    <critical>true</critical>
+</TaskDefinitionDocument>

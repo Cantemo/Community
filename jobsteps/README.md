@@ -28,3 +28,10 @@ List of jobsteps
    has the state CLOSED. This is useful if the file being ingested is
    still being recorded to and is of a format not supported by the
    growing file ingest.
+
+* autoimport-wait-hash.xml
+
+   This script delays completion of an auto import job until Vidispine
+   has calculated the hash of the source file. This can be used for
+   example if you have some external automation which is triggered on
+   job completion, but which requires the hash to be available.
