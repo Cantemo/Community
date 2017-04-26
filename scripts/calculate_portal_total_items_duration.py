@@ -17,3 +17,5 @@ while True:
     if len(searchresults['hits']['hits']) < number:
         break
     first = first + number
+
+print "Total duration is " + str(duration) + "s"
