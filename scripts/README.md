@@ -14,3 +14,8 @@ Portal but which interacts with it in different ways.
    or filesystem performance where the size of the ingested video is
    irrelevant, but where you need lots of files.
 
+* calculate_portal_total_items_duration.py
+
+   A script which calculate the total duration of Portal's items in seconds.
+   Best is to execute it with portal management shell:
+      /opt/cantemo/portal/manage.py shell < calculate_portal_total_items_duration.py
