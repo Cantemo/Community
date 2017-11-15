@@ -16,6 +16,6 @@ Portal but which interacts with it in different ways.
 
 * calculate_portal_total_items_duration.py
 
-   A script which calculate the total duration of Portal's items in seconds.
+   A script which calculates the total duration of Portal items in seconds.
    Best is to execute it with portal management shell:
       /opt/cantemo/portal/manage.py shell < calculate_portal_total_items_duration.py
