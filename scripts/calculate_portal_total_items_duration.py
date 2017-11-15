@@ -4,7 +4,7 @@
 #    /opt/cantemo/portal/manage.py shell < calculate_portal_total_items_duration.py
 #
 # This works for Portal version 2.3.x onwards, earlier versions should calculate on 'f_durationSeconds_flt' instead
-# or 'durationSeconds'.
+# of 'durationSeconds'.
 from portal.search.elastic import query_elastic
 
 searchquery = '{"query": {"filtered": {"filter": {"bool": {"must": [{"and": {"filters": [{"term": {"search_interval": "all"}}]}}, {"missing": {"field": "portal_deleted"}}]}}, "query": {"match_all": {}}}}}'
