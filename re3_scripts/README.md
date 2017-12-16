@@ -7,7 +7,7 @@ This directory contains scripts that can be used in Portal Rules Engine 3
 
 * From Portal UI, Admin > Rules Engine 3 > Add a new script
 * Select one of the files from your computer, and Upload
-* Create a rule, for example Manual Process, or triggered by a Saved Search
+* Create a rule, for example Manual Process, or one triggered by a Saved Search
 * in Create Rule, select Run shell script and select the script filename from the dropdown
 
 
