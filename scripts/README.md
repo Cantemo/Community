@@ -19,3 +19,15 @@ Portal but which interacts with it in different ways.
    A script which calculates the total duration of Portal items in seconds.
    Best is to execute it with portal management shell:
       /opt/cantemo/portal/manage.py shell < calculate_portal_total_items_duration.py
+
+* remove_specific_items_metadata_changes.py
+
+	A script used to remove specific metadata changes which have been done on items.
+	
+	It gives differents options to filter the changes by specific users, dates, fields
+	or specific text changes.
+	
+	To be copied and executed on the Portal path. 
+	
+	With the --help option it gives details about the different options and usage, e.g:
+	(on Portal path) /opt/cantemo/python/bin/python remove_specific_items_metadata_changes.py --help
