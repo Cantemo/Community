@@ -61,7 +61,7 @@ class SessionRedirectView(CView):
         if not cookie_domain:
             return HttpResponseServerError("SESSION_REDIRECT_COOKIE_DOMAIN not configured in django settings")
 
-        # Only allow if the request is for a full url, and that url is a subdomain of settings.FMC_COOKIE_DOMAIN
+        # Only allow if the request is for a full url, and that url is a subdomain of settings.SESSION_REDIRECT_COOKIE_DOMAIN
         if parsed_url.scheme not in ["http", "https"]:
             return HttpResponseBadRequest("next parameter must be a url with http or https")
 
