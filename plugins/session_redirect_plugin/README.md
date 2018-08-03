@@ -24,8 +24,7 @@ Example content of localsettings.py:
     SESSION_REDIRECT_COOKIE_NAME = '`'
     SESSION_REDIRECT_COOKIE_DOMAIN = '.example.com'
 
-Usage
------
+## Usage
 
 In your external application you can now do a check if the user supplies a cookie
 with the name `external_session_id`. If they do you can use that to 
@@ -42,8 +41,25 @@ Please note that the `next` parameter must either be http or https. All other me
 disallowed for security reasons. Likewise, the hostname of the `next` parameter also
 must match the value of the SESSION_REDIRECT_COOKIE_DOMAIN setting.
 
-Trouble shooting
-----------------
+## Installation
+
+To install this plugin, copy the entire session_redirect_plugin
+directory into /opt/cantemo/portal/portal/plugins on the Portal server and then restart using either
+
+```
+supervisorctl restart all
+```
+
+if the system is CentOS 6 or
+
+```
+systemctl restart portal.target
+```
+
+if the system is CentOS 7.
+
+
+## Trouble shooting
 
 This plugin tries to leave good feedback if incorrect settings or
 input data is sent to the request. One thing to take note of is that
