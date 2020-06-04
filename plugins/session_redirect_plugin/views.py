@@ -7,7 +7,10 @@ framework code refer to the Django developers documentation.
 
 """
 import logging
-import urlparse
+try:
+    import urllib.parse as urlparse
+except ImportError:
+    import urlparse
 
 from django.http import HttpResponseRedirect, HttpResponseServerError, HttpResponseBadRequest
 

@@ -37,7 +37,7 @@ class SessionRedirectRegister(Plugin):
         log.debug('Register the App')
 
     def __call__(self):
-        from __init__ import __version__ as versionnumber
+        from .__init__ import __version__ as versionnumber
         _app_dict = {
                 'name': 'session Redirect Plugin',
                 'version': '0.0.1',
