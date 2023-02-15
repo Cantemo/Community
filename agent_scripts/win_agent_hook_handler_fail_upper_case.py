@@ -20,6 +20,7 @@ log = logging.getLogger(__name__)
 data_in = None
 
 log.debug("Started")
+# On Windows must check sys.stdin.isatty() before reading stdin.
 if not sys.stdin.isatty():
     data_in = sys.stdin.read()
     log.debug("data_in: " + data_in)

@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """
-Example script for Agent pre- post-hook testing using mediainfo for media parameters.
+Example script for Cantemo Agent using mediainfo for media parameters.
 
 Disallow vertically aligned videos, and videos with less than Full HD resolution.
 
@@ -127,14 +127,13 @@ else:
     if operation == 'file_ready':
         # Files are ready and readable - check with mediainfo
         files = request.get('files', [])
-        # Simulate failed opening of a file
         for f in files:
             mediainfo = get_mediainfo_output(f['path'])
             log.debug('MediaInfo: %r', mediainfo)
             # Default to failed
             f['status'] = 'failed'
             if not mediainfo:
-                f['message'] = 'Failed to get media info'
+                f['message'] = 'Failed to get media info - see mac_agent_check_mediainfo.log for details'
             else:
                 video_width, video_height = get_video_width_height(mediainfo)
                 rotation = get_video_rotation(mediainfo)

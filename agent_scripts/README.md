@@ -17,12 +17,20 @@ standard in/out is handled.
 
 ## List of scripts
 
-* agent_hook_handler_fail_upper_case.py
+### mac_agent_hook_handler_fail_upper_case.py
 
-    Disallows user to upload files with upper case characters.
+Simple script implementation. Disallows user to upload files with upper case characters.
 
-* agent_check_mediainfo.py
+### mac_agent_check_mediainfo.py
     
-    User `mediainfo` to parse media parameters, disallow vertically aligned videos, and videos with less 
-    than Full HD resolution.
+User `mediainfo` to parse media parameters, disallow vertically aligned videos, and videos with less 
+than Full HD resolution. Uses functions for cleaner code.
+
+## mac_agent_upload_with_original_uri_in_metadata.py
+
+Adds path on client side as a metadata value on the uploaded file.
     
+### win_agent_hook_handler_fail_upper_case.py
+
+Windows version of `mac_agent_hook_handler_fail_upper_case.py` using functions for a cleaner
+script setup. `sys.stdin.isatty()` used to check stdin beore reading.
