@@ -23,10 +23,10 @@ Simple script implementation. Disallows user to upload files with upper case cha
 
 ### mac_agent_check_mediainfo.py
     
-User `mediainfo` to parse media parameters, disallow vertically aligned videos, and videos with less 
+Run `mediainfo` to parse media parameters, disallow vertically aligned videos, and videos with less
 than Full HD resolution. Uses functions for cleaner code.
 
-## mac_agent_upload_with_original_uri_in_metadata.py
+### mac_agent_upload_with_original_uri_in_metadata.py
 
 Adds path on client side as a metadata value on the uploaded file.
     
