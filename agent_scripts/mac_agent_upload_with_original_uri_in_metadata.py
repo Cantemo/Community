@@ -43,7 +43,7 @@ def write_metadata_sidecar(media_file_path: str) -> dict:
 
     Returns a dictionary with "status" and "message" values to return for this file to the Agent.
     """
-    sidecar_comment = "created with mac_agent_hook_handler_fail_upper_case.py"
+    sidecar_comment = "created with mac_agent_upload_with_original_uri_in_metadata.py"
     sidecar_path = os.path.splitext(media_file_path)[0] + ".xml"
 
     status = None
